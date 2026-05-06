@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments (the shared script venv is recreated locally)
+.venv/
+venv/
+env/
+
+# Credentials — env vars are the preferred path; .env.example files are tracked
+.env
+.env.local
+*/.env
+**/.env
+
+# IDE
+.vscode/
+.idea/
+*.swp

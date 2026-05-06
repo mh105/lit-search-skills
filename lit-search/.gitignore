@@ -1,0 +1,9 @@
+# Python venv shared by Semantic Scholar and PsyArxiv example scripts.
+scripts/.venv/
+
+# Engine-local credential files. Shell env vars (S2_API_KEY, OSF_TOKEN) are the
+# preferred mechanism — see SKILL.md and the .env.example files.
+scripts/*/.env
+
+# macOS
+.DS_Store

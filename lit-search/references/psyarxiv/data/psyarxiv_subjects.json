@@ -1,0 +1,1406 @@
+[
+  {
+    "id": "5b4e7427c6983001430b6c74",
+    "text": "Achievement and Status",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c86",
+    "text": "Action",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c71"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cca",
+    "text": "Adolescence",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c3b",
+    "text": "Affect and Emotion Regulation",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c98",
+    "text": "Aging",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c7e",
+    "text": "Animal Learning and Behavior",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cc8",
+    "text": "Anthropological Linguistics and Sociolinguistics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c3e",
+    "text": "Anxiety Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7427c6983001430b6ca8",
+    "text": "Applied Linguistics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7427c6983001430b6ca7",
+    "text": "Assessment",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c47",
+    "text": "Attachment",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cd5",
+    "text": "Attention",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cd6",
+    "text": "Attitudes and Persuasion",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cd9",
+    "text": "Audition",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c71"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cd4",
+    "text": "Behavioral Economics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c42"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c77",
+    "text": "Behavioral Neuroscience",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1b"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cf5",
+    "text": "Biases, Framing, and Heuristics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c5b",
+    "text": "Bipolar and Related Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cf3",
+    "text": "Built Environments",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c56"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c6c",
+    "text": "Careers",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cda",
+    "text": "Clinical",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c5f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c3a",
+    "text": "Clinical Child Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c2b",
+    "text": "Clinical Decision Making",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c8d",
+    "text": "Clinical Ethics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c38",
+    "text": "Clinical Neuropsychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c68",
+    "text": "Clinical Neuroscience",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1b"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c1f",
+    "text": "Clinical Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7427c6983001430b6ca9",
+    "text": "Clinical Psychophysiology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c63",
+    "text": "Cognitive Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c23",
+    "text": "Cognitive Neuroscience",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1b"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c8c",
+    "text": "Cognitive Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cc5",
+    "text": "Community",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cf4",
+    "text": "Computational Linguistics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c55",
+    "text": "Computational Modeling",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c41"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c1c",
+    "text": "Computational Neuroscience",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1b"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cfe",
+    "text": "Concepts and Categories",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cf8",
+    "text": "Consciousness",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7427c6983001430b6ca2",
+    "text": "Consultation",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c51"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cbd",
+    "text": "Consumer Decision Making",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c42"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c42",
+    "text": "Consumer Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cb3",
+    "text": "Contingent Valuation",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c42"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cf7",
+    "text": "Correctional",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c5f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c3c",
+    "text": "Couples, Marriage, and Family",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cd0",
+    "text": "Creativity",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c50",
+    "text": "Cross-cultural Issues",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cf1",
+    "text": "Cross-cultural Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7428c6983001430b6cae"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cde",
+    "text": "Cultural Differences",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cae",
+    "text": "Cultural Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cd7",
+    "text": "Death, Dying, and Grieving",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c67",
+    "text": "Depressive Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c1d",
+    "text": "Developmental Neuroscience",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1b"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c2d",
+    "text": "Developmental Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c20",
+    "text": "Diagnosis",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c70",
+    "text": "Disability",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c5e",
+    "text": "Disruptive, Impulse-control, and Conduct Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c35",
+    "text": "Dissociative Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c72",
+    "text": "Diversity",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c89",
+    "text": "Early Adulthood",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c52",
+    "text": "Early Childhood",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ce7",
+    "text": "Ecology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c56"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c8b",
+    "text": "Educational Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c2c",
+    "text": "Elimination Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ce6",
+    "text": "Embodied Cognition",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c71"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c58",
+    "text": "Emotion",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7427c6983001430b6ca4",
+    "text": "Emotional Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c4f",
+    "text": "Employee Behavior and Motivation",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7424c6983001430b6c1a",
+    "text": "Engineering Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": null
+  },
+  {
+    "id": "5b4e7426c6983001430b6c56",
+    "text": "Environmental Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c24",
+    "text": "Ergonomics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7427c6983001430b6ca0",
+    "text": "Evolution",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cbf",
+    "text": "Evolutionary Biology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6ca0"
+  },
+  {
+    "id": "5b4e7427c6983001430b6ca1",
+    "text": "Experimental Design and Sample Surveys",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c41"
+  },
+  {
+    "id": "5b4e7428c6983001430b6ccd",
+    "text": "Experimental Economics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c42"
+  },
+  {
+    "id": "5b4e7428c6983001430b6ccb",
+    "text": "Family and Kin",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6ca0"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c28",
+    "text": "Feeding and Eating Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cf2",
+    "text": "First and Second Language Acquisition",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cba",
+    "text": "Forensic",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c5f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c5f",
+    "text": "Forensic and Legal Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c9d",
+    "text": "Gender Dysphoria",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cac",
+    "text": "Gene-environment Interaction",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cd1",
+    "text": "Genetic factors",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c93",
+    "text": "Health Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cfc",
+    "text": "Health-related Behavior",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c93"
+  },
+  {
+    "id": "5b4e7427c6983001430b6ca6",
+    "text": "Historical Linguistics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c26",
+    "text": "Human Resources",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7429c6983001430b6d02",
+    "text": "Illness",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c93"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cf0",
+    "text": "Imagery",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cb9",
+    "text": "Impression Formation",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c53",
+    "text": "Individual Differences",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c22",
+    "text": "Industrial and Organizational Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c37",
+    "text": "Infancy",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c6a",
+    "text": "Informational Environments",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c56"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c66",
+    "text": "Innovation and Technology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cb0",
+    "text": "Intergroup Processes",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6caa",
+    "text": "Interpersonal Relationships",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c97",
+    "text": "Intervention",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c51"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c27",
+    "text": "Intervention Research",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c7a",
+    "text": "Interventions",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cb8",
+    "text": "Intragroup Processes",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c44",
+    "text": "Job Analysis",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cfb",
+    "text": "Judgment and Decision Making",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7429c6983001430b6d01",
+    "text": "Language",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c87",
+    "text": "Language Aquisition",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c91",
+    "text": "Language Description and Documentation",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c2e",
+    "text": "Leadership",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cee",
+    "text": "Learner",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8b"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cea",
+    "text": "Learning",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ce4",
+    "text": "Learning Environments",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c56"
+  },
+  {
+    "id": "5b4e7428c6983001430b6ccf",
+    "text": "Learning Process",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8b"
+  },
+  {
+    "id": "5b4e7429c6983001430b6d00",
+    "text": "Learning Situation",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8b"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cef",
+    "text": "Legal",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c5f"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c21",
+    "text": "Life Sciences",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": null
+  },
+  {
+    "id": "5b4e7426c6983001430b6c62",
+    "text": "Linguistics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c4e",
+    "text": "Mathematical Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c41"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ce3",
+    "text": "Mating",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6ca0"
+  },
+  {
+    "id": "5b4e7427c6983001430b6ca5",
+    "text": "Memory",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c33",
+    "text": "Mental Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cf6",
+    "text": "Mental Health",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c93"
+  },
+  {
+    "id": "5b4e7424c6983001430b6c19",
+    "text": "Meta-science",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": null
+  },
+  {
+    "id": "5b4e7427c6983001430b6c6f",
+    "text": "Middle Adulthood",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c31",
+    "text": "Middle & Late Childhood",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c4a",
+    "text": "Molecular and Cellular Neuroscience",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1b"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cbc",
+    "text": "Moral Behavior",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cb5",
+    "text": "Moral Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ceb",
+    "text": "Morphology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cdb",
+    "text": "Motion Perception",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c71"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cb7",
+    "text": "Motivational Behavior",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cb4",
+    "text": "Motor Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cbe",
+    "text": "Multi-attribute Choice",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c42"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cff",
+    "text": "Multi-cultural Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7428c6983001430b6cae"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ce8",
+    "text": "Multisensory Integration",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c71"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c48",
+    "text": "Music",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c36",
+    "text": "Narrative Research",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cc6",
+    "text": "Natural Environments",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c56"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cc2",
+    "text": "Negotiation",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c42"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c57",
+    "text": "Neurocognitive Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c80",
+    "text": "Neurodevelopmental Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c1b",
+    "text": "Neuroscience",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": null
+  },
+  {
+    "id": "5b4e7427c6983001430b6c9e",
+    "text": "Nonverbal Behavior",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c78",
+    "text": "Nudges",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c42"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c2f",
+    "text": "Obsessive-compulsive and Related Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c43",
+    "text": "Occupational Health",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cc7",
+    "text": "Old Age",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c81",
+    "text": "Organizational Culture",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c83",
+    "text": "Organizational Decision Making",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c3f",
+    "text": "Organizational Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c54",
+    "text": "Organizational Diversity",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c46",
+    "text": "Organizational Ethics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c9c",
+    "text": "Organizational Justice",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c69",
+    "text": "Paraphilic Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cad",
+    "text": "Parenting",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6ca0"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c71",
+    "text": "Perception",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cc3",
+    "text": "Perceptual Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c96",
+    "text": "Perceptual Organization",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c71"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c25",
+    "text": "Performance Appraisal",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c7f",
+    "text": "Performance Measurement",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7428c6983001430b6ce0",
+    "text": "Personality and Creativity",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cdf",
+    "text": "Personality and Situations",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c73",
+    "text": "Personality Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c5c",
+    "text": "Personality Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c49",
+    "text": "Personality Processes",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c29",
+    "text": "Personnel Law",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cc4",
+    "text": "Phonetics and Phonology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c4c",
+    "text": "Physical Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c7d",
+    "text": "Physiology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cd8",
+    "text": "Picture Processing",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c71"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cc9",
+    "text": "Politics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c79",
+    "text": "Prejudice and Discrimination",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c8f",
+    "text": "Prenatal Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ce5",
+    "text": "Prevention",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c93"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c9b",
+    "text": "Problem Solving",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c6b",
+    "text": "Prosocial Behavior",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7424c6983001430b6c18",
+    "text": "Psychiatry",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": null
+  },
+  {
+    "id": "5b4e7428c6983001430b6cd2",
+    "text": "Psycholinguistics and Neurolinguistics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c45",
+    "text": "Psychology, other",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c59",
+    "text": "Psychometrics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c41"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cab",
+    "text": "Psychopharmacology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c7b",
+    "text": "Psychotherapy",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7427c6983001430b6ca3",
+    "text": "Psychotic Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c41",
+    "text": "Quantitative Methods",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7428c6983001430b6caf",
+    "text": "Quantitative Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c41"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cfa",
+    "text": "Reasoning",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c8c"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cd3",
+    "text": "Reciprocity",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6ca0"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c82",
+    "text": "Religion and Spirituality",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c99",
+    "text": "Retirement",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c51",
+    "text": "School Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c6e",
+    "text": "Science and Technology Policy",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c41"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c4b",
+    "text": "Selection and Placement",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c9a",
+    "text": "Self and Social Identity",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c60",
+    "text": "Self-concept and Identity",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cdc",
+    "text": "Self-esteem",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c65",
+    "text": "Self-regulation",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cf9",
+    "text": "Semantics and Pragmatics",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c4d",
+    "text": "Sexual Dysfunctions",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c85",
+    "text": "Sexuality",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c5a",
+    "text": "Sleep-wake Disorders",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c1e",
+    "text": "Social and Behavioral Sciences",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": null
+  },
+  {
+    "id": "5b4e7425c6983001430b6c34",
+    "text": "Social and Personality Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c6d",
+    "text": "Social Cognition",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c32",
+    "text": "Social Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ce2",
+    "text": "Social health",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c93"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c94",
+    "text": "Social Influence",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ce1",
+    "text": "Social Settings",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c56"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c88",
+    "text": "Social Well-being",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cb6",
+    "text": "Somatization",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c3d",
+    "text": "Sport Psychology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c92",
+    "text": "Statistical Methods",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c41"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cdd",
+    "text": "Stress",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c93"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c30",
+    "text": "Substance Abuse and Addiction",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cfd",
+    "text": "Survival and Psychological Adaptations",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6ca0"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c9f",
+    "text": "Sustainability Behavior",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c56"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c8e",
+    "text": "Syntax",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c64",
+    "text": "Systems Neuroscience",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1b"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ce9",
+    "text": "Testing",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c51"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c5d",
+    "text": "Testing and Assessment",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cce",
+    "text": "Text and Discourse",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cb1",
+    "text": "Theories of Personality",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c39",
+    "text": "Theory and Philosophy of Science",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1e"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c76",
+    "text": "Therapy",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c7c",
+    "text": "Toddlerhood/Preschool Period",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c2d"
+  },
+  {
+    "id": "5b4e7428c6983001430b6ccc",
+    "text": "Touch, Taste, and Smell",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c71"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cbb",
+    "text": "Training and Development",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c61",
+    "text": "Trait Theory",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c90",
+    "text": "Trauma and Stress",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1f"
+  },
+  {
+    "id": "5b4e7429c6983001430b6ced",
+    "text": "Treatment",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c93"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c84",
+    "text": "Typological Linguistics and Linguistic Diversity",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7426c6983001430b6c62"
+  },
+  {
+    "id": "5b4e7429c6983001430b6cec",
+    "text": "Vestibular Systems and Proprioception",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c71"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c75",
+    "text": "Violence and Aggression",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cc0",
+    "text": "Vision",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7427c6983001430b6c71"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cb2",
+    "text": "Well-being",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c34"
+  },
+  {
+    "id": "5b4e7427c6983001430b6c8a",
+    "text": "Workgroup and Teams",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7428c6983001430b6cc1",
+    "text": "Work-life Balance",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7425c6983001430b6c2a",
+    "text": "Work-life Quality",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c22"
+  },
+  {
+    "id": "5b4e7426c6983001430b6c40",
+    "text": "Other Neuroscience and Neurobiology",
+    "taxonomy_name": "PsyArXiv",
+    "parent_id": "5b4e7425c6983001430b6c1b"
+  }
+]
