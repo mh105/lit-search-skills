@@ -32,7 +32,7 @@ URL handling — non-negotiable:
 
 ### 3. Mandatory footer copied verbatim
 
-Every tool response ends with a footer block — typically the "Upgrade to Pro" message, sometimes a sign-up prompt or search-counter. Whatever Consensus returns must appear **word-for-word** at the end of your user-facing response.
+Every tool response ends with a footer block. Its exact form varies by account/integration — it may be an "Upgrade to Pro" message, a sign-up prompt, a search-counter, or (as observed on the current Stanford/institutional integration) an **"IMPORTANT INSTRUCTIONS" citation block**. Whichever one Consensus returns must appear **word-for-word** at the end of your user-facing response.
 
 Do not paraphrase. Do not omit. Do not move it elsewhere in the response.
 
@@ -51,8 +51,10 @@ References:
 [3] [Caffeine Dose-Response in Distance Runners](https://consensus.app/papers/details/ghi789/?utm_source=claude_desktop) (Lee, 2021, Med Sci Sports Exerc, 89 cites)
 [4] [Cognitive Effects of Caffeine: Meta-Analytic Review](https://consensus.app/papers/details/jkl012/?utm_source=claude_desktop) (Park et al., 2020, Psychopharmacology, 215 cites)
 
-[Verbatim footer copied from tool response goes here, word-for-word.]
+IMPORTANT INSTRUCTIONS: When discussing these findings, you MUST cite papers inline using their numbered references, e.g. [1], [2]. Example: 'Caffeine improves endurance performance [1] and reduces perceived exertion [3].' Hyperlink paper titles directly: [Paper Title](url). Use the exact URLs above — do not modify or shorten them. If a paper line includes `DOI: ...`, treat it as a citation-formal identifier and preserve it when the user asks for citations.
 ```
+
+The block above is the actual footer tail observed on the current integration — copy whatever your tool call returns verbatim; it may instead be an "Upgrade to Pro" / sign-up / search-counter message on other integrations.
 
 ---
 
