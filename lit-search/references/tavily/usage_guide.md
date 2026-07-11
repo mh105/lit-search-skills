@@ -165,7 +165,7 @@ PubMed's HTML is structured and Tavily extracts cleanly — abstract, authors, M
 include_domains=["biorxiv.org", "medrxiv.org"]
 ```
 
-There's a dedicated bioRxiv MCP (`mcp__claude_ai_bioRxiv__*`) which should be preferred for DOI lookup and category browsing. Tavily targeting bioRxiv is the **fallback** when you want a single search across bioRxiv *and* other preprint mirrors at once (e.g., bioRxiv + arXiv + lab pages in one call).
+There's a dedicated bioRxiv MCP (`mcp__bioRxiv.*`) which should be preferred for DOI lookup and category browsing. Tavily targeting bioRxiv is the **fallback** when you want a single search across bioRxiv *and* other preprint mirrors at once (e.g., bioRxiv + arXiv + lab pages in one call).
 
 ### arXiv (`arxiv.org`)
 

@@ -35,7 +35,7 @@ Apply in order. Stop at first match.
 
 3. Otherwise (quick paper list, evidence question, cross-check, simple lookup,
    contextual discussion, exploratory mode):
-     → call `mcp__claude_ai_Consensus__search` directly
+     → call `mcp__codex_apps__consensus._search` directly
      → Apply the filter philosophy below and the citation rules in
        `output_protocol.md`.
 ```
@@ -83,15 +83,14 @@ Reasons:
 
 ### Concrete heuristics
 
-| User signal | Apply filter |
+The Codex connector exposes only a `query` parameter. When the user explicitly asks for a supported filter, encode it as a token in the query text:
+
+| User signal | Query-token filter |
 |---|---|
-| "RCTs" / "clinical trials" | `study_types=["rct"]` |
-| "best evidence" / "highest-quality" / "rigorous" | `study_types=["rct", "meta-analysis", "systematic review"]` |
-| "peer-reviewed" / "published" / "no preprints" | `exclude_preprints=true` |
-| "recent" / "last N years" | `year_min=<computed>` |
-| "human studies only" | `human=true`. Otherwise leave off. |
-| "top-tier journals" | `sjr_max=1` |
-| "long-term" / "1+ year" | `duration_min=365` (rare) |
+| "RCTs" / "clinical trials" | `study:rct` |
+| "best evidence" / "highest-quality" / "rigorous" | `study:rct OR study:meta-analysis OR study:systematic-review` if the connector accepts the phrasing; otherwise run separate focused queries |
+| "recent" / "last N years" | `year:<computed>-<current>` |
+| "human studies only" | `human:true`. Otherwise leave off. |
 
 Otherwise: just `query`. Let Consensus's ranker work.
 
@@ -99,7 +98,7 @@ Otherwise: just `query`. Let Consensus's ranker work.
 
 ## Cross-engine bridging
 
-Consensus output has opaque hash URLs and no DOI/PMID/paperId. To follow a Consensus hit into another engine:
+Consensus output has opaque hash URLs and often has DOI, but no PMID/S2 paperId. To follow a Consensus hit into another engine:
 
 1. Capture the title from the Consensus result.
 2. Resolve to S2 paperId via `scripts/semantic-scholar/examples/title_match.py "..."`.
@@ -116,8 +115,8 @@ For cross-engine deduplication, **keep Consensus papers in their own block** in 
 ### A. Quick evidence question (direct MCP)
 
 ```
-mcp__claude_ai_Consensus__search(
-  query="does sleep restriction impair declarative memory consolidation",
+mcp__codex_apps__consensus._search(
+  query="does sleep restriction impair declarative memory consolidation"
 )
 ```
 
@@ -128,8 +127,8 @@ User intent matches the rule-3 path: single-question evidence check. No filters 
 User just received an S2 result list and wants validation:
 
 ```
-mcp__claude_ai_Consensus__search(
-  query="hippocampal sharp-wave ripples memory consolidation",
+mcp__codex_apps__consensus._search(
+  query="hippocampal sharp-wave ripples memory consolidation"
 )
 ```
 
@@ -140,14 +139,12 @@ Compare top hits with S2's. Surface overlap and divergence. No filters.
 User said "what's the strongest clinical evidence":
 
 ```
-mcp__claude_ai_Consensus__search(
-  query="GLP-1 agonist Alzheimer's disease cognitive outcomes",
-  medical_mode=True,
-  exclude_preprints=True,
+mcp__codex_apps__consensus._search(
+  query="GLP-1 agonist Alzheimer's disease cognitive outcomes study:rct year:2020-2026 human:true"
 )
 ```
 
-Two filters because the user's framing explicitly named the bar.
+Query-token filters because the user's framing explicitly named the bar.
 
 ### D. Lit review (delegate)
 

@@ -1,6 +1,6 @@
 # Consensus — Tool Reference
 
-A single tool: `mcp__claude_ai_Consensus__search`. Consensus is a meta-search engine layered over **Semantic Scholar + PubMed + Scopus + ArXiv** (~200M peer-reviewed papers). It's the one engine in this skill that crosses biomedical and physical-science boundaries in a single call.
+Two Codex tools: `mcp__codex_apps__consensus._search` and `mcp__codex_apps__consensus._fetch`. Consensus is a meta-search engine layered over **Semantic Scholar + PubMed + Scopus + ArXiv** (~200M peer-reviewed papers). It's the one engine in this skill that crosses biomedical and physical-science boundaries in a single call.
 
 > **Read `usage_guide.md` first.** Two higher-level skills (`consensus-literature-review`, `consensus-grant-finder`) wrap Consensus into curated multi-search workflows. When the user's intent matches lit-review or NIH-grant-scoping, invoke that skill instead of calling this tool directly.
 
@@ -25,37 +25,31 @@ A single tool: `mcp__claude_ai_Consensus__search`. Consensus is a meta-search en
 
 ---
 
-## `search` — the single tool
+## `_search`
 
 ### Parameters
 
 | Param | Default | Notes |
 |---|---|---|
-| `query` | required | ≤ 500 chars. Natural language; no boolean operators or field tags needed. |
-| `medical_mode` | `null` | `true` filters to top medical journals + clinical guidelines (~8M docs). |
-| `exclude_preprints` | `null` | `true` returns peer-reviewed only. Pairs well with `medical_mode`. |
-| `study_types` | `null` | List: `rct`, `meta-analysis`, `systematic review`, `case report`, `literature review`, `non-rct experimental`, `non-rct observational study`, `non-rct in vitro`, `animal`. Set ONLY when user explicitly asks. |
-| `human` | `null` | `true` = humans only. Excludes preclinical / mechanism / animal. |
-| `sample_size_min` | `null` | Min participant count. Use sparingly — many landmark studies are intentionally small. |
-| `sjr_max` | `null` | Journal quartile cap (1=Q1 top, 4=Q4). Set ONLY for "top-tier journals" requests. |
-| `year_min`, `year_max` | `null` | Year filters. Set only on explicit request. |
-| `duration_min`, `duration_max` | `null` | Study duration in **days**. 365 for "1+ year", 730 for "long-term". Rare. |
+| `query` | required | Natural language. The Codex connector accepts only this field. To request filters, include supported tokens in the query text, e.g. `year:2020-2026`, `study:rct`, `study:meta-analysis`, `study:systematic-review`, `human:true`. |
 
 ### Return shape
 
-The tool returns formatted markdown text (not JSON). Format per result:
+The tool returns JSON with `papers` and `top_papers`. Each result includes title, authors, year, citation count, journal, URL, abstract, study type/takeaway when available, and DOI when available. Before citing any result, call `_fetch` with the result id.
 
 ```
-[N] [Paper Title](consensus.app/papers/details/<hash>/?utm_source=claude_desktop)
-   (Author1 et al., Year, Citations, Journal)
+[N] [Paper Title](consensus.app/papers/details/<hash>/?utm_source=chatgpt)
+   (Author1 et al., Year, Citations, Journal, DOI when present)
    Full abstract text (typically 1-3 paragraphs).
 ```
 
-Followed by mandatory citation instructions and an "Upgrade to Pro" footer.
+Followed by mandatory citation instructions and, when provided, a sign-up/upgrade footer.
 
-Each result carries: title (hyperlinked), Consensus URL (opaque hash, NOT a DOI), authors (first + et al.), publication year, citation count, journal name, full abstract.
+Each result carries: title, Consensus URL (opaque hash in the URL), authors, publication year, citation count, journal name, full abstract, and often DOI. It does not carry PMID, Semantic Scholar paperId, fields-of-study, PDF URL, or publisher URL.
 
-It does **not** carry: DOI, PMID, Semantic Scholar paperId, raw author list, fields-of-study, PDF / publisher URL.
+## `_fetch`
+
+`_fetch(id="<hash>")` is required before citing a search result. In Codex search results, use the opaque hash in the Consensus URL if there is no separate `id` field in the payload. `_fetch` returns the canonical Consensus paper URL plus metadata such as authors, year, journal, citation count, and DOI when available.
 
 To bridge a Consensus hit into another engine: search the title in Semantic Scholar (`title_match.py`) or PubMed (`"Title fragment"[Title]`). Title-match is reliable at ≥7 distinct words.
 

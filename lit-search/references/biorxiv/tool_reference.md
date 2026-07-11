@@ -1,6 +1,6 @@
 # bioRxiv — Tool Reference
 
-Seven tools exposed via the `mcp__claude_ai_bioRxiv__*` namespace. Coverage:
+Seven tools exposed via the `mcp__bioRxiv.*` namespace. Coverage:
 
 - **bioRxiv** (`server="biorxiv"`) — biological-sciences preprints (Cold Spring Harbor).
 - **medRxiv** (`server="medrxiv"`) — medical / health-sciences preprints.

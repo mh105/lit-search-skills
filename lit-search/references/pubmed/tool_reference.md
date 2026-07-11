@@ -1,6 +1,6 @@
 # PubMed — Tool Reference
 
-Seven tools exposed via the `mcp__claude_ai_PubMed__*` namespace. They split into three families:
+Seven tools exposed via the `mcp__PubMed.*` namespace. They split into three families:
 
 - **Discovery** — `search_articles`, `find_related_articles` (find PMIDs from a topic or seed paper)
 - **Retrieval** — `get_article_metadata`, `get_full_text_article` (PMID/PMCID → rich record)

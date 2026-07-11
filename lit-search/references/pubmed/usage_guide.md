@@ -215,7 +215,7 @@ PubMed has no author-ID system equivalent to Semantic Scholar's `authorId`. "Smi
 
 ### `find_related_articles` ignores `max_results`
 
-The MCP tool accepts a `max_results` parameter, but the underlying ELink endpoint does not honor it — every call returns the *full* related-PMID list (often >1000 entries). Trim client-side or, in the lit-search skill, route the call through a haiku subagent (see `Mode: Associate` → "PubMed similarity sub-workflow" in SKILL.md).
+The MCP tool accepts a `max_results` parameter, but the underlying ELink endpoint does not honor it — every call returns the *full* related-PMID list (often >1000 entries). Trim client-side or, in the lit-search skill, route the call through a bounded Codex subagent (see `Mode: Associate` → "PubMed similarity sub-workflow" in SKILL.md).
 
 ### `lookup_article_by_citation` returns swapped `pmid` / `key` fields
 

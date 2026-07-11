@@ -21,13 +21,13 @@ Indices must align with the order Consensus returned, not your own re-ordering.
 At the end of the response, list every cited paper with its title hyperlinked to the URL Consensus returned.
 
 ```
-[1] [Paper Title One](https://consensus.app/papers/details/<hash>/?utm_source=claude_desktop) (Authors, Year, Journal, Citations)
-[2] [Paper Title Two](https://consensus.app/papers/details/<hash>/?utm_source=claude_desktop) (Authors, Year, Journal, Citations)
+[1] [Paper Title One](https://consensus.app/papers/details/<hash>/?utm_source=chatgpt) (Authors, Year, Journal, Citations)
+[2] [Paper Title Two](https://consensus.app/papers/details/<hash>/?utm_source=chatgpt) (Authors, Year, Journal, Citations)
 ```
 
 URL handling — non-negotiable:
 - Use the URL **verbatim** from the tool result.
-- The `?utm_source=claude_desktop` query string must remain intact. Stripping it violates the protocol.
+- Preserve the exact `utm_source` query string returned by the tool. In Codex this is commonly `?utm_source=chatgpt`; older environments may return a different value. Stripping or rewriting it violates the protocol.
 - Do not substitute DOI / publisher / Google Scholar URLs. Even if a DOI is more "useful" downstream, it isn't allowed here.
 
 ### 3. Mandatory footer copied verbatim
@@ -46,10 +46,10 @@ and reduces perceived exertion at moderate doses [2]. Effects on cognitive
 performance are smaller and more variable across individuals [4].
 
 References:
-[1] [Caffeine and Endurance: A Meta-Analysis](https://consensus.app/papers/details/abc123/?utm_source=claude_desktop) (Smith et al., 2023, Sports Med, 142 cites)
-[2] [Perceived Exertion and Stimulants in Cycling](https://consensus.app/papers/details/def456/?utm_source=claude_desktop) (Jones, 2022, J Appl Physiol, 38 cites)
-[3] [Caffeine Dose-Response in Distance Runners](https://consensus.app/papers/details/ghi789/?utm_source=claude_desktop) (Lee, 2021, Med Sci Sports Exerc, 89 cites)
-[4] [Cognitive Effects of Caffeine: Meta-Analytic Review](https://consensus.app/papers/details/jkl012/?utm_source=claude_desktop) (Park et al., 2020, Psychopharmacology, 215 cites)
+[1] [Caffeine and Endurance: A Meta-Analysis](https://consensus.app/papers/details/abc123/?utm_source=chatgpt) (Smith et al., 2023, Sports Med, 142 cites)
+[2] [Perceived Exertion and Stimulants in Cycling](https://consensus.app/papers/details/def456/?utm_source=chatgpt) (Jones, 2022, J Appl Physiol, 38 cites)
+[3] [Caffeine Dose-Response in Distance Runners](https://consensus.app/papers/details/ghi789/?utm_source=chatgpt) (Lee, 2021, Med Sci Sports Exerc, 89 cites)
+[4] [Cognitive Effects of Caffeine: Meta-Analytic Review](https://consensus.app/papers/details/jkl012/?utm_source=chatgpt) (Park et al., 2020, Psychopharmacology, 215 cites)
 
 [Verbatim footer copied from tool response goes here, word-for-word.]
 ```
@@ -67,8 +67,8 @@ According to Consensus, X [C1] and Y [C2]. PubMed adds clinical evidence
 that Z [PM1].
 
 Consensus references:
-[C1] [Title](https://consensus.app/papers/details/<hash>/?utm_source=claude_desktop) (Authors, Year, Journal, Cites)
-[C2] [Title](https://consensus.app/papers/details/<hash>/?utm_source=claude_desktop) (Authors, Year, Journal, Cites)
+[C1] [Title](https://consensus.app/papers/details/<hash>/?utm_source=chatgpt) (Authors, Year, Journal, Cites)
+[C2] [Title](https://consensus.app/papers/details/<hash>/?utm_source=chatgpt) (Authors, Year, Journal, Cites)
 
 PubMed references:
 [PM1] [Title](https://doi.org/<doi>) (Authors, Year, Journal)
@@ -85,7 +85,7 @@ The footer appears once, at the very end, regardless of how many other engines c
 - ❌ Missing inline `[N]` citations on cited papers.
 - ❌ Informal attribution ("the literature suggests..." without a numbered cite).
 - ❌ DOI / publisher / Scholar URLs in place of the Consensus URL.
-- ❌ Stripped `?utm_source=claude_desktop` query string.
+- ❌ Stripped or rewritten `utm_source` query string.
 - ❌ Omitted footer.
 - ❌ Paraphrased footer ("you can sign up at..." instead of the verbatim text).
 - ❌ Misaligned indices (your `[2]` doesn't match Consensus's result #2).

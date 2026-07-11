@@ -1,6 +1,6 @@
 # Tavily — Tool Reference
 
-Five tools exposed via the `mcp__tavily__*` namespace. They split into two families:
+Five tools exposed via the `mcp__tavily.*` namespace. They split into two families:
 
 - **Discovery** — `tavily_search`, `tavily_research` (turn a query into ranked results / a synthesised answer)
 - **Retrieval** — `tavily_extract`, `tavily_crawl`, `tavily_map` (turn a known URL into structured content)

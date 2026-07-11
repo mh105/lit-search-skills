@@ -155,9 +155,9 @@ Single-result endpoint that returns the closest title match. Use to resolve a kn
 
 Allows up to 10M papers in batches of 1000, with boolean query syntax, filters, and sorting. **Use this instead of `/paper/search` for any sweep larger than ~100 papers.** CLI: `keyword_search.py --bulk`.
 
-### Recommendations `from=all-cs` — June 2023
+### Recommendations pools — `from=recent` vs `from=all-cs` — June 2023
 
-The recommendations API can pull from a CS-only KNN pool. Default is `from=recent` (last 60 days, all fields). For neuroscience, stay on the default.
+The `forpaper` endpoint's `from` accepts **only** `recent` and `all-cs` (the API rejects anything else — there is no field-specific pool such as `all-neuroscience`). `from=recent` draws from papers published in ~the last 60 days **from today**, independent of the seed's age — a well-cited older seed keeps accreting recent related work, so it stays populated for neuroscience. `from=all-cs` is a CS-only KNN pool (older papers included); use only for CS topics. For a single seed, `recommend_from_paper.py` defaults to **merging `from=recent` with a single-seed POST-pool query** (they share only ~40% of results: `recent` is broader and journal-heavy with some topical drift, the pool is tighter to the seed's subtopic and preprint-heavy). Both routes are recency-biased; for canonical older work, cross-check PubMed `find_related_articles`.
 
 ### Filtering on `/paper/search` — March 2023
 

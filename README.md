@@ -1,6 +1,6 @@
-# lit-search — multi-engine literature search skills for Claude Code
+# lit-search — multi-engine literature search skills for Codex
 
-Three Claude Code / Claude Desktop **skills** for academic literature work:
+Three Codex **skills** for academic literature work:
 
 | Skill | What it does |
 |---|---|
@@ -10,9 +10,11 @@ Three Claude Code / Claude Desktop **skills** for academic literature work:
 
 The two `consensus-*` skills are heavier, deliverable-producing workflows. Day-to-day "find me papers on X" / "more like this paper" / "latest preprints in Y" goes through `lit-search`.
 
+> **Looking for the Claude Code / Claude Desktop build?** It lives on the [`claude`](https://github.com/mh105/lit-search-skills/tree/claude) branch. This is the **`codex`** branch, wired for Codex apps + `~/.codex/config.toml` MCP servers.
+
 ## What `lit-search` does
 
-One skill, six engines, **five adaptive modes**. The skill reads the user's phrasing and routes to the right mode automatically:
+One skill, seven engines, **six adaptive modes**. The skill reads the user's phrasing and routes to the right mode automatically:
 
 | Mode | Triggered by | Engines used |
 |---|---|---|
@@ -21,85 +23,103 @@ One skill, six engines, **five adaptive modes**. The skill reads the user's phra
 | **Latest** | "preprints from the last N weeks on…" | bioRxiv + PsyArxiv (with subagent filter) |
 | **AI** | "press releases / lab pages / trial registries on…" | Tavily web search |
 | **Associate** | "more like this paper", DOI/PMID seed → similar work | Semantic Scholar recommendations API + PubMed similarity |
+| **Vet** | "is this paper retracted / reliable / safe to cite?", "well-supported vs. contested work on X" | Scite (reliability & consensus check) |
 
 Each mode has its own quality signals, dedup rules, and output format. See `lit-search/SKILL.md` for the full decision tree.
 
-## Engines: MCPs vs. local script engines
+## Engines: Codex apps, MCP servers, and local scripts
 
-`lit-search` mixes two integration styles. **You install them separately.**
+`lit-search` mixes three integration styles on Codex. **You install them separately.**
 
 | Engine | Type | Install path |
 |---|---|---|
-| **PubMed** | MCP connector | claude.ai → Connectors → enable |
-| **bioRxiv** | MCP connector | claude.ai → Connectors → enable |
-| **Consensus** | MCP connector | claude.ai → Connectors → enable |
-| **Tavily** | MCP (custom) | Add manually via MCP config (free tier available) |
+| **Consensus** | Codex app | Codex → Apps → enable |
+| **Scite** | Codex app | Codex → Apps → enable |
+| **PubMed** | MCP server (Claude endpoint) | add to `~/.codex/config.toml` |
+| **bioRxiv** | MCP server (Claude endpoint) | add to `~/.codex/config.toml` |
+| **Tavily** | MCP server (custom) | add to `~/.codex/config.toml` (free tier available) |
 | **Semantic Scholar** | local Python script | API key + `pip install` |
 | **PsyArxiv (OSF)** | local Python script | OSF personal access token + `pip install` |
 
-**MCP engines** run server-side via Claude.app's connector / MCP system — Claude calls a tool, the MCP returns JSON. No code in this repo runs them.
+**Codex apps** (Consensus, Scite) are enabled from the Codex app / connector directory — auth is handled in-app, no API keys to manage. Their tools show up under `mcp__codex_apps__consensus._*` and `mcp__codex_apps__scite._*`.
+
+**MCP servers** (PubMed, bioRxiv, Tavily) are remote MCP endpoints registered in `~/.codex/config.toml` under `[mcp_servers.<name>]`. PubMed and bioRxiv reuse Anthropic's hosted MCP endpoints (the same servers the Claude connectors talk to); Tavily is Tavily's own hosted MCP. Codex exposes their tools as `mcp__<name>.*` — so **the server names matter** and must match what the skill calls (`PubMed`, `bioRxiv`, `tavily`).
 
 **Script engines** are thin Python wrappers shipped under `lit-search/scripts/<engine>/`. The skill invokes them via `scripts/.venv/bin/python …`. They exist because Semantic Scholar's recommendations API and OSF's PsyArxiv API don't have polished MCPs at time of writing, and the wrappers add field-set workarounds, ID resolution, and CLI ergonomics.
 
-You can install whichever subset you need — modes degrade gracefully when an engine is unavailable, but Explore needs Consensus + S2, Latest needs bioRxiv + PsyArxiv, etc.
+You can install whichever subset you need — modes degrade gracefully when an engine is unavailable, but Explore needs Consensus + S2, Latest needs bioRxiv + PsyArxiv, Vet needs Scite, etc.
 
 ---
 
 ## Installation
 
-### 1. Install the skills into your Claude config
+### 1. Install the skills into your Codex config
 
-Claude discovers skills by scanning `~/.claude/skills/<skill-name>/SKILL.md`. Each of the three skill folders in this repo must sit **directly** under `~/.claude/skills/` — not nested inside a parent wrapper folder.
+Codex discovers skills by scanning `~/.codex/skills/<skill-name>/SKILL.md`. Each of the three skill folders in this repo must sit **directly** under `~/.codex/skills/` — not nested inside a parent wrapper folder.
 
-Clone the repo to a working location, then symlink (preferred — lets you `git pull` to update) or copy the three skill folders in:
+Clone the repo to a working location and check out this `codex` branch, then symlink (preferred — lets you `git pull` to update) or copy the three skill folders in:
 
 ```bash
-# Clone anywhere convenient (NOT inside ~/.claude/skills directly)
+# Clone anywhere convenient (NOT inside ~/.codex/skills directly)
 git clone https://github.com/mh105/lit-search-skills.git ~/code/lit-search-skills
 cd ~/code/lit-search-skills
+git checkout codex
 
 # Option A — symlink (recommended; updates flow through git pull)
-mkdir -p ~/.claude/skills
-ln -s "$PWD/lit-search"                    ~/.claude/skills/lit-search
-ln -s "$PWD/consensus-literature-review"   ~/.claude/skills/consensus-literature-review
-ln -s "$PWD/consensus-grant-finder"        ~/.claude/skills/consensus-grant-finder
+mkdir -p ~/.codex/skills
+ln -s "$PWD/lit-search"                    ~/.codex/skills/lit-search
+ln -s "$PWD/consensus-literature-review"   ~/.codex/skills/consensus-literature-review
+ln -s "$PWD/consensus-grant-finder"        ~/.codex/skills/consensus-grant-finder
 
 # Option B — copy (simpler, but you'll re-copy after every update)
-cp -r lit-search consensus-literature-review consensus-grant-finder ~/.claude/skills/
+cp -r lit-search consensus-literature-review consensus-grant-finder ~/.codex/skills/
 ```
 
 Verify the layout — each folder should contain its own `SKILL.md`:
 
 ```
-~/.claude/skills/
+~/.codex/skills/
 ├── lit-search/SKILL.md
 ├── consensus-literature-review/SKILL.md
 └── consensus-grant-finder/SKILL.md
 ```
 
-Restart Claude. The three skills should now appear in the available-skills list.
+Restart Codex. The three skills should now appear in the available-skills list.
 
-**Claude Desktop**: same idea — drop (or symlink) the three folders directly into your Claude Desktop skills directory.
+### 2. Enable Codex apps (Consensus, Scite)
 
-### 2. Install MCP connectors (PubMed, bioRxiv, Consensus)
+Consensus and Scite are available as **Codex apps** — enable them from the Codex app / connector directory. Auth is handled in-app; no API keys to manage manually.
 
-These three are one-click connectors in **claude.ai → Settings → Connectors → Browse connectors**:
+- **Consensus** — AI-ranked academic search across ~200M papers. <https://consensus.app/>
+- **Scite** — Smart Citations + retraction / editorial-notice checks; powers **Vet** mode. <https://scite.ai/>
 
-- **PubMed** — search NCBI / MEDLINE. <https://claude.ai/directory>
-- **bioRxiv** — biology / neuroscience preprints. <https://claude.ai/directory>
-- **Consensus** — AI-ranked academic search across ~200M papers. <https://consensus.app/> · connector at <https://claude.ai/directory>
+Once enabled, their tools appear as `mcp__codex_apps__consensus._*` and `mcp__codex_apps__scite._*`. Note: the depth of Scite's Smart Citation data (tally counts, citation snippets) depends on your Scite / institutional access tier — Vet mode is built to work even when only titles, DOIs, and editorial notices come back.
 
-Click "Connect" for each; auth is handled via the Claude.app UI. No API keys to manage manually.
+### 3. Add MCP servers (PubMed, bioRxiv, Tavily)
 
-### 3. Install Tavily MCP (manual, free tier)
+These three are remote MCP servers registered in `~/.codex/config.toml`. **PubMed and bioRxiv reuse Anthropic's hosted MCP endpoints** (the same servers the Claude connectors use); **Tavily** is Tavily's own hosted MCP (free tier ≈ 1,000 calls/month — sign up at <https://app.tavily.com/>).
 
-Tavily is not a one-click connector — register and add it as a custom MCP:
+Add these blocks to `~/.codex/config.toml`:
 
-1. Sign up: <https://app.tavily.com/> (free tier ≈ 1,000 calls/month).
-2. Grab your API key from the Tavily dashboard.
-3. Add the MCP server per Tavily docs: <https://docs.tavily.com/documentation/mcp>
+```toml
+[mcp_servers.PubMed]
+url = "https://pubmed.mcp.claude.com/mcp"
 
-In Claude Code, this typically means adding an entry to `~/.claude/mcp.json` (or via `claude mcp add`).
+[mcp_servers.bioRxiv]
+url = "https://hcls.mcp.claude.com/biorxiv/mcp"
+
+[mcp_servers.tavily]
+url = "https://mcp.tavily.com/mcp"
+bearer_token_env_var = "TAVILY_API_KEY"
+```
+
+Then export your Tavily key so Codex can pass it as the bearer token:
+
+```bash
+export TAVILY_API_KEY="..."
+```
+
+The server names (`PubMed`, `bioRxiv`, `tavily`) are load-bearing — the skill calls tools as `mcp__PubMed.*`, `mcp__bioRxiv.*`, and `mcp__tavily.*`. Restart Codex after editing `config.toml`. See Tavily's MCP docs for details: <https://docs.tavily.com/documentation/mcp>.
 
 ### 4. Set up local script engines (Semantic Scholar + PsyArxiv)
 
@@ -126,13 +146,13 @@ export OSF_TOKEN="..."
 
 ### 5. Verify
 
-In Claude, try:
+In Codex, try:
 
 ```
 find papers on predictive coding in primary visual cortex
 ```
 
-If routed correctly, the skill enters **Explore** mode and queries Consensus + Semantic Scholar. Try `more like this paper: 10.1038/nature14066` to exercise **Associate** mode (and confirm `S2_API_KEY` works).
+If routed correctly, the skill enters **Explore** mode and queries Consensus + Semantic Scholar. Try `more like this paper: 10.1038/nature14066` to exercise **Associate** mode (and confirm `S2_API_KEY` works), or `is <DOI> retracted or safe to cite?` to exercise **Vet** mode (Scite).
 
 ---
 
@@ -144,8 +164,10 @@ If routed correctly, the skill enters **Explore** mode and queries Consensus + S
 | OSF personal access token | <https://osf.io/settings/tokens/> |
 | Tavily signup + API key | <https://app.tavily.com/> |
 | Tavily MCP setup docs | <https://docs.tavily.com/documentation/mcp> |
-| Claude.app connector directory | <https://claude.ai/directory> |
-| Consensus | <https://consensus.app/> |
+| PubMed MCP endpoint | `https://pubmed.mcp.claude.com/mcp` |
+| bioRxiv MCP endpoint | `https://hcls.mcp.claude.com/biorxiv/mcp` |
+| Consensus (Codex app) | <https://consensus.app/> |
+| Scite (Codex app) | <https://scite.ai/> |
 
 ## License
 
