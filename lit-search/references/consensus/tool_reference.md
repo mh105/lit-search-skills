@@ -4,8 +4,6 @@ Two Codex tools: `mcp__codex_apps__consensus._search` and `mcp__codex_apps__cons
 
 > **Read `usage_guide.md` first.** Two higher-level skills (`consensus-literature-review`, `consensus-grant-finder`) wrap Consensus into curated multi-search workflows. When the user's intent matches lit-review or NIH-grant-scoping, invoke that skill instead of calling this tool directly.
 
-> **Read `output_protocol.md` before formatting any response that uses Consensus output.** Citation rules are mandatory and enforced by the MCP server.
-
 ---
 
 ## When to call this tool directly
@@ -43,7 +41,7 @@ The tool returns JSON with `papers` and `top_papers`. Each result includes title
    Full abstract text (typically 1-3 paragraphs).
 ```
 
-Followed by mandatory citation instructions and, when provided, a sign-up/upgrade footer.
+The response may end with Consensus's own trailer text (citation instructions and/or a sign-up/upgrade footer, when provided) — server-appended boilerplate, not paper data.
 
 Each result carries: title, Consensus URL (opaque hash in the URL), authors, publication year, citation count, journal name, full abstract, and often DOI. It does not carry PMID, Semantic Scholar paperId, fields-of-study, PDF URL, or publisher URL.
 
