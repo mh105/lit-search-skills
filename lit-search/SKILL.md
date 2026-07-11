@@ -26,6 +26,12 @@ scripts/.venv/bin/pip install -r scripts/requirements.txt
 
 Credentials (`S2_API_KEY`, `OSF_TOKEN`) are read from the shell environment — `.env` files are also supported but the env-var path is the default. See `scripts/<engine>/.env.example` for which variables each engine needs.
 
+### MCP engine tool names — discover at runtime, never hardcode
+
+The MCP tool names written throughout this skill (`mcp__codex_apps__consensus._search`, `mcp__PubMed.search_articles`, `mcp__bioRxiv.search_preprints`, `mcp__codex_apps__scite._search_literature`, and the `mcp__tavily.*` family) are **illustrative names for this Codex setup**. The registered names are **host-dependent**: other environments expose the same servers under different prefixes or opaque IDs (e.g. `mcp__<uuid>__search`), so a literal call to a hardcoded name can fail with "tool not found."
+
+**Before the first MCP call in a session, resolve the real tool name at runtime** — do not assume the illustrative name resolves. Discover it by capability keyword (e.g. via `ToolSearch` or the host's tool-discovery mechanism), then call whatever name it returns. Treat every `mcp__…` string below as "the tool that does X," not as a literal identifier. The Python-script engines (Semantic Scholar, PsyArxiv) are unaffected — they run through the venv, not MCP.
+
 ## When to use
 
 The skill triggers on any of these intents:
@@ -103,6 +109,8 @@ gh search code "<algorithm-name>" --filename=*.py
 
 This sometimes runs alongside Explore (find a paper, then find the code) but doesn't share the engine selection logic.
 
+**Caution — over-constrained `gh search` returns an empty result, not an error.** Stacking filters (e.g. a multi-word phrase *and* `--language=python` *and* `--sort=stars`) can legitimately match zero repos and print nothing at all. An empty result here is **not** a failure or an auth problem — it means "no repo matched all constraints." Loosen the query (drop `--language`, shorten the phrase) and retry before concluding the search is broken.
+
 ---
 
 ## Modes
@@ -140,7 +148,9 @@ For when the user has a specific paper in mind, names an author, or describes pa
 **Engines**:
 
 - **PubMed** via `mcp__PubMed.search_articles` → `mcp__PubMed.get_article_metadata`. Use for biomedical queries, named MeSH-mappable topics, author searches with affiliation, clinical work.
-- **Google Scholar via Tavily** with `include_domains=["scholar.google.com"]`. Use for citation-count cross-checks, exact-title lookups (`exact_match=true`), or coverage Tavily extracts well from Scholar's HTML (Friston 2023 active inference, etc.).
+- **Google Scholar via Tavily** with `include_domains=["scholar.google.com"]`. Use for citation-count cross-checks, exact-title lookups (`exact_match="true"`), or coverage Tavily extracts well from Scholar's HTML (Friston 2023 active inference, etc.).
+  - Caution — Do not use Scholar profile URLs as bibliography entries. Prefer PubMed, S2, DOI, or publisher URLs for clean paper metadata. If Tavily returns a Scholar profile page, extract only the citation count/title row as auxiliary metadata.
+
 
 **Workflow**:
 
@@ -182,6 +192,7 @@ Both engines have **no native keyword search** (bioRxiv has none at all; PsyArxi
    scripts/.venv/bin/python scripts/psyarxiv/examples/recent_preprints.py --days 14 --limit 100
    ```
    Default cap: 3–5 pages (~90–150 records per engine). Exhaustive sweeps only when the user explicitly asks for "all" / "every" / "comprehensive."
+   **Note — bioRxiv `search_preprints` reports `"total":0` even when results are present.** The `total` field in its response envelope is not populated; it is a known API quirk, **not** an error and **not** an empty-result signal. Judge success by the returned `results`/`count`, and paginate by `cursor` (+ observed page size), never by `total`.
 3. **Spawn a cheap subagent to filter for relevance** (this is the cost-saving step):
    ```
    multi_agent_v1.spawn_agent({
@@ -200,13 +211,6 @@ Both engines have **no native keyword search** (bioRxiv has none at all; PsyArxi
 - Sorted newest-first.
 - Each entry: title, authors (first + et al.), date, DOI/preprint URL, abstract preview, brief relevance note.
 - **Always disclose** "preprint, not peer-reviewed" parenthetically. If `published_doi` is set, link to the published version too.
-
-**Cost intuition**:
-
-- bioRxiv neuroscience volume ≈ 30–50 preprints/day. A 14-day window is ~500 records → ~17 paginated calls.
-- PsyArxiv volume ≈ 30–50/day. Similar order.
-- Subagent filter pass: 1 cheap-model call processing the ~1000 combined records.
-- Total: 30–40 MCP calls + 1 subagent call per Latest invocation. Tighten the date window if the cost feels high.
 
 ### Mode: AI
 
@@ -277,12 +281,6 @@ See `references/semantic-scholar/tool_reference.md` §8 for the response envelop
 - For each recommendation, include a 1-line note on *why* it relates (shared method, same author, follow-up, etc.) when the abstract makes it obvious — otherwise omit rather than guess.
 - Note "preprint, not peer-reviewed" parenthetically for any arXiv/bioRxiv/medRxiv hits returned in the recommendation set.
 
-**Cost intuition**:
-
-- One single-shot API call per seed-set, regardless of `--limit`. This is the cheapest mode.
-- Add 1 `title_match.py` call per unresolved title seed.
-- No subagent filtering needed unless the user asked for hundreds of recommendations and wants topic-relevance scoring on top.
-
 #### PubMed similarity sub-workflow (biomedical seeds only)
 
 `mcp__PubMed.find_related_articles` is similarity-based (MeSH + word-weighted abstract overlap), not citation-based. Two important quirks:
@@ -335,7 +333,7 @@ So Vet can both **select** papers by their citation/notice profile and, when fie
    search_literature(dois=[doi], has_erratum=true)      # non-empty → has an erratum
    ```
    Batch multiple DOIs per call where possible; run the four notice probes in parallel.
-   **Gotcha (verified):** with a notice filter applied, an empty result can carry the message *"not present in Scite's index"* even for a DOI Scite *does* index (the plain fetch in step 2 proves it is indexed). Empty here means "does not carry that notice," not "absent from Scite." Only report a paper as un-indexed if step 2 also returned nothing.
+   **Gotcha — notice-absent surfaces as an error, not a clean empty list (verified):** on this integration, a DOI+notice probe for a notice the paper does *not* carry frequently returns an **HTTP 500** (and sometimes an empty result carrying a *"not present in Scite's index"* message) rather than a clean empty list. **If the plain fetch in step 2 returned the paper, treat a 500 (or an empty result) on its notice probe as "notice absent" — not as a tool failure and not as an un-indexed paper.** Only report a paper as un-indexed if step 2 itself returned nothing. Because the probe can 500, do not batch a DOI's four notice probes so tightly that one 500 aborts the others, and lean on the two signals that are reliable here: the `RETRACTED` / `RETRACTED ARTICLE` title prefix from step 2, and the `term`-based retraction sweep (sub-flow B step 3).
 4. Report each paper's status per notice type, with links.
 
 **Workflow — sub-flow B: consensus / controversy map on a topic or claim.**
@@ -359,12 +357,6 @@ So Vet can both **select** papers by their citation/notice profile and, when fie
 - **Sub-flow B**: two labelled lists — "Well-supported (≥N supporting citations)" and "Contested (≥M contrasting citations)" — each entry `title` + returned tally when present + Scite report link + `doi.org` link.
 - **State the payload caveat once**: use returned Scite tallies/snippets only when present; otherwise results are selected by Scite's Smart Citation / editorial-notice filters and the actual counts/citation statements live on the linked Scite report page. Do not fabricate numbers.
 - Vet is a reliability gate, not a synthesis — it does not summarize the science or draw conclusions. For that, use Explore.
-
-**Cost intuition**:
-
-- Sub-flow A: 1 metadata call + up to 4 notice-probe calls per batch of DOIs (probes parallelize). Cheap.
-- Sub-flow B: 2–3 calls total. Cheap.
-- No subagent needed — keep `limit` small because payloads may include abstracts, citation snippets, and full-text excerpts.
 
 **Out of scope for Vet** (needs the gated `evidence:*:mcp` entitlements, not enabled on this license): Scite's regulatory/clinical databases — clinical trials, FAERS/MAUDE adverse events, MHRA alerts, 510(k) clearances, drugs, patents, grants — all return an entitlement error. If those are ever enabled they warrant their own mode; they are not part of Vet.
 
@@ -449,11 +441,11 @@ Each mode has its own quality signals — see the per-mode workflow above.
 ```
 Semantic Scholar  scripts/.venv/bin/python scripts/semantic-scholar/...    references/semantic-scholar/
 PsyArxiv          scripts/.venv/bin/python scripts/psyarxiv/...            references/psyarxiv/
-PubMed            (MCP only)                                                references/pubmed/
-bioRxiv           (MCP only)                                                references/biorxiv/
-Consensus         (MCP only)                                                references/consensus/
-Tavily            (MCP only)                                                references/tavily/
-Scite             (MCP only)                                                references/scite/
+PubMed            (MCP only)                                               references/pubmed/
+bioRxiv           (MCP only)                                               references/biorxiv/
+Consensus         (MCP only)                                               references/consensus/
+Tavily            (MCP only)                                               references/tavily/
+Scite             (MCP only)                                               references/scite/
 ```
 
 The two Python-script engines share a single venv at `scripts/.venv/`. Re-create with `python3 -m venv scripts/.venv && scripts/.venv/bin/pip install -r scripts/requirements.txt` if missing.
