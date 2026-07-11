@@ -1,6 +1,7 @@
 """OSF API v2 client scoped to PsyArxiv preprints.
 
-Public functions assume `OSF_TOKEN` is in the environment. The OSF Preprints
+Public functions assume `OSF_TOKEN` is in the environment (auto-loaded from a
+.env beside this script if present). The OSF Preprints
 endpoint follows JSON:API conventions: filtering via `filter[field]=value`,
 sparse fieldsets via `fields[preprints]=...`, link-based pagination via
 `links.next` URLs, and standard `data/attributes/relationships/links` envelopes.
@@ -16,10 +17,59 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
 import urllib.error
 import urllib.parse
 import urllib.request
 from typing import Any, Iterator
+
+
+def _load_dotenv_if_present() -> None:
+    # Look beside this client first (scripts/psyarxiv/.env), then the cwd and up
+    # to 5 parent dirs. Own-dir wins so a per-engine .env drop-in works
+    # regardless of where the script is invoked from. Mirrors s2_client.py.
+    search_dirs = [os.path.dirname(os.path.abspath(__file__))]
+    cwd = os.getcwd()
+    for _ in range(5):
+        search_dirs.append(cwd)
+        nxt = os.path.dirname(cwd)
+        if nxt == cwd:
+            break
+        cwd = nxt
+    for d in search_dirs:
+        candidate = os.path.join(d, ".env")
+        if os.path.isfile(candidate):
+            try:
+                with open(candidate, "r") as f:
+                    for line in f:
+                        line = line.strip()
+                        if not line or line.startswith("#") or "=" not in line:
+                            continue
+                        k, _, v = line.partition("=")
+                        k = k.strip()
+                        if k in os.environ:
+                            continue  # real shell / settings.json env wins
+                        v = v.strip().strip('"').strip("'")
+                        # A value of the form $(...) is run in a shell and
+                        # replaced by its stdout, so a .env can pull a live
+                        # value from the user's shell profile at runtime
+                        # instead of freezing a copy of the secret.
+                        if v.startswith("$(") and v.endswith(")"):
+                            try:
+                                v = subprocess.run(
+                                    v[2:-1], shell=True, text=True,
+                                    capture_output=True, timeout=15,
+                                ).stdout.strip()
+                            except Exception:
+                                v = ""
+                        if v:
+                            os.environ[k] = v
+            except OSError:
+                pass
+            return
+
+
+_load_dotenv_if_present()
 
 BASE_URL = "https://api.osf.io/v2"
 PSYARXIV = "psyarxiv"

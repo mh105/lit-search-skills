@@ -12,7 +12,7 @@ The two `consensus-*` skills are heavier, deliverable-producing workflows. Day-t
 
 ## What `lit-search` does
 
-One skill, six engines, **five adaptive modes**. The skill reads the user's phrasing and routes to the right mode automatically:
+One skill, seven engines, **six adaptive modes**. The skill reads the user's phrasing and routes to the right mode automatically:
 
 | Mode | Triggered by | Engines used |
 |---|---|---|
@@ -21,6 +21,7 @@ One skill, six engines, **five adaptive modes**. The skill reads the user's phra
 | **Latest** | "preprints from the last N weeks on…" | bioRxiv + PsyArxiv (with subagent filter) |
 | **AI** | "press releases / lab pages / trial registries on…" | Tavily web search |
 | **Associate** | "more like this paper", DOI/PMID seed → similar work | Semantic Scholar recommendations API + PubMed similarity |
+| **Vet** | "is this paper retracted / reliable / safe to cite?", "well-supported vs. contested work on X" | Scite (reliability & consensus check) |
 
 Each mode has its own quality signals, dedup rules, and output format. See `lit-search/SKILL.md` for the full decision tree.
 
@@ -33,6 +34,7 @@ Each mode has its own quality signals, dedup rules, and output format. See `lit-
 | **PubMed** | MCP connector | claude.ai → Connectors → enable |
 | **bioRxiv** | MCP connector | claude.ai → Connectors → enable |
 | **Consensus** | MCP connector | claude.ai → Connectors → enable |
+| **Scite** | MCP connector | claude.ai → Connectors → enable |
 | **Tavily** | MCP (custom) | Add manually via MCP config (free tier available) |
 | **Semantic Scholar** | local Python script | API key + `pip install` |
 | **PsyArxiv (OSF)** | local Python script | OSF personal access token + `pip install` |
@@ -41,7 +43,7 @@ Each mode has its own quality signals, dedup rules, and output format. See `lit-
 
 **Script engines** are thin Python wrappers shipped under `lit-search/scripts/<engine>/`. The skill invokes them via `scripts/.venv/bin/python …`. They exist because Semantic Scholar's recommendations API and OSF's PsyArxiv API don't have polished MCPs at time of writing, and the wrappers add field-set workarounds, ID resolution, and CLI ergonomics.
 
-You can install whichever subset you need — modes degrade gracefully when an engine is unavailable, but Explore needs Consensus + S2, Latest needs bioRxiv + PsyArxiv, etc.
+You can install whichever subset you need — modes degrade gracefully when an engine is unavailable, but Explore needs Consensus + S2, Latest needs bioRxiv + PsyArxiv, Vet needs Scite, etc.
 
 ---
 
@@ -81,15 +83,16 @@ Restart Claude. The three skills should now appear in the available-skills list.
 
 **Claude Desktop**: same idea — drop (or symlink) the three folders directly into your Claude Desktop skills directory.
 
-### 2. Install MCP connectors (PubMed, bioRxiv, Consensus)
+### 2. Install MCP connectors (PubMed, bioRxiv, Consensus, Scite)
 
-These three are one-click connectors in **claude.ai → Settings → Connectors → Browse connectors**:
+These four are one-click connectors in **claude.ai → Settings → Connectors → Browse connectors**:
 
 - **PubMed** — search NCBI / MEDLINE. <https://claude.ai/directory>
 - **bioRxiv** — biology / neuroscience preprints. <https://claude.ai/directory>
 - **Consensus** — AI-ranked academic search across ~200M papers. <https://consensus.app/> · connector at <https://claude.ai/directory>
+- **Scite** — Smart Citations + retraction / editorial-notice checks; powers **Vet** mode. <https://scite.ai/> · connector at <https://claude.ai/directory>
 
-Click "Connect" for each; auth is handled via the Claude.app UI. No API keys to manage manually.
+Click "Connect" for each; auth is handled via the Claude.app UI. No API keys to manage manually. Note: the depth of Scite's Smart Citation data (tally counts, citation snippets) depends on your Scite / institutional access tier — Vet mode is built to work even when only titles, DOIs, and editorial notices come back.
 
 ### 3. Install Tavily MCP (manual, free tier)
 
@@ -132,7 +135,7 @@ In Claude, try:
 find papers on predictive coding in primary visual cortex
 ```
 
-If routed correctly, the skill enters **Explore** mode and queries Consensus + Semantic Scholar. Try `more like this paper: 10.1038/nature14066` to exercise **Associate** mode (and confirm `S2_API_KEY` works).
+If routed correctly, the skill enters **Explore** mode and queries Consensus + Semantic Scholar. Try `more like this paper: 10.1038/nature14066` to exercise **Associate** mode (and confirm `S2_API_KEY` works), or `is <DOI> retracted or safe to cite?` to exercise **Vet** mode (Scite).
 
 ---
 
@@ -146,6 +149,7 @@ If routed correctly, the skill enters **Explore** mode and queries Consensus + S
 | Tavily MCP setup docs | <https://docs.tavily.com/documentation/mcp> |
 | Claude.app connector directory | <https://claude.ai/directory> |
 | Consensus | <https://consensus.app/> |
+| Scite (Smart Citations) | <https://scite.ai/> |
 
 ## License
 

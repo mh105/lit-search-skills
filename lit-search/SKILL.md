@@ -1,23 +1,21 @@
 ---
 name: lit-search
 description: >
-  Multi-engine academic literature search across Semantic Scholar, PubMed, bioRxiv, PsyArxiv,
-  Consensus, and Tavily. Adaptively routes queries into one of five modes — Explore (default),
-  Precise, Latest, AI, or Associate — to balance recall, precision, and cost. Use whenever the
-  user asks to find papers, look up references, search for related work, look up specific papers
+  Multi-engine academic literature search with adaptive routing. Use whenever the user asks 
+  to find papers, look up references, search for related work, look up specific papers
   by title/DOI/ID, find work by a named author, find the latest preprints in a field, surface
-  non-paper material (press releases, clinical trial reports, lab pages) on a research topic, or
-  find papers similar/related to one or more seed papers ("more like this paper").
-  Do NOT use for full literature reviews — those are handled by the `consensus-literature-review`
-  skill, triggered by explicit "literature review" / "lit review" language. Do NOT use for NIH
-  grant scoping — that is handled by `consensus-grant-finder`.
+  non-paper material (press releases, clinical trial reports, lab pages) on a research topic,
+  or find papers similar/related to one or more seed papers ("more like this paper"),
+  or check whether a paper or claim is reliable — retracted, corrected, disputed, or well-supported.
 ---
 
 # Literature Search
 
-Adaptive multi-engine search for academic literature. The skill picks one of five modes based on what the user is actually trying to do, runs the appropriate engine(s), and returns results in a format that suits the mode.
+Adaptive multi-engine search for academic literature. The skill picks one of six modes based on what the user is actually trying to do, runs the appropriate engine(s), and returns results in a format that suits the mode.
 
 ## Runtime setup
+
+The `scripts` and `references` folders are under the same directory containing this file.
 
 Python example scripts (Semantic Scholar, PsyArxiv) run through a shared venv at `scripts/.venv/`. **Always invoke them as `scripts/.venv/bin/python scripts/<engine>/examples/<script>.py …`** — the bare `python` interpreter on this machine does not have `requests` installed and will `ModuleNotFoundError`. If the venv is missing (fresh clone), recreate it with:
 
@@ -38,6 +36,7 @@ The skill triggers on any of these intents:
 - "Tell me the latest preprints on X in the last N weeks"
 - "What's online about X" (non-paper sources, press, trials, lab pages)
 - "More like this paper" / "find papers similar to <DOI/title>" / "related work to these papers"
+- "Is this paper retracted / reliable / safe to cite?" / "how contested is this claim?" / "which work on X is well-supported vs. disputed?"
 - "Implementation of X on GitHub"
 
 It does **not** trigger on:
@@ -69,23 +68,29 @@ Apply in order. Stop at the first match.
    "preprints in the last N weeks/days/months"
    → MODE: Latest  (bioRxiv + PsyArxiv with subagent filter)
 
-5. Is the user looking for a SPECIFIC PAPER OR AUTHOR they have in mind?
+5. Is the user asking whether a paper or claim is RELIABLE, or how CONTESTED it is?
+   Phrasing like "is this paper retracted / reliable / safe to cite", "has <paper> been
+   corrected or flagged", "how disputed is <claim>", "find the contested vs. well-supported
+   work on X". The subject may be specific paper(s) (DOI/PMID/title) or a topic/claim.
+   → MODE: Vet  (Scite only)
+
+6. Is the user looking for a SPECIFIC PAPER OR AUTHOR they have in mind?
    Phrasing like "the X paper by Y", "the 2023 Friston paper on active inference",
    "find papers by Karl Friston since 2024", named-paper / named-author queries
    → MODE: Precise  (PubMed + Tavily(Google Scholar))
 
-6. Is the user looking for NON-PAPER WEB MATERIAL on a topic?
+7. Is the user looking for NON-PAPER WEB MATERIAL on a topic?
    Phrasing like "what's online about X", "press / news / trial registries",
    "lab pages / company X's research / FDA submission for Y"
    → MODE: AI  (Tavily, broad or domain-restricted)
 
-7. DEFAULT — broad topic-driven discovery.
+8. DEFAULT — broad topic-driven discovery.
    Phrasing like "find papers on X", "what does the literature say on X",
    contextual discussions where the user wants to ground a claim
    → MODE: Explore  (Consensus MCP direct + Semantic Scholar cross-check)
 ```
 
-The default is **Explore**. The other four are entered only when the user's phrasing matches their specific cue.
+The default is **Explore**. The other five are entered only when the user's phrasing matches their specific cue.
 
 ## GitHub code search (orthogonal)
 
@@ -251,17 +256,17 @@ See `references/semantic-scholar/tool_reference.md` §8 for the response envelop
    scripts/.venv/bin/python scripts/semantic-scholar/examples/title_match.py "<title>"
    ```
 2. **Pick the endpoint by seed count:**
-   - Exactly one seed → `recommend_from_paper.py <id>`. Default `--from recent` (≈ last 60 days across all fields) is the right choice for neuroscience / psychology / biomedical work. Switch to `--from all-cs` only when the topic is clearly computer science.
+   - Exactly one seed → `recommend_from_paper.py <id>`. By default this **merges two complementary routes**: the `from=recent` pool (papers published in ~the last 60 days *from today*) plus a single-seed **pool** query (co-citation-based, tighter to the seed's subtopic). Switch to `--from all-cs` (a pure CS-pool query, no merge) only when the topic is clearly computer science.
    - Two or more seeds → `recommend_from_pool.py`. Pass each seed as `--pos <id>` (repeatable) or via `--pos-file <path>` (one ID per line). If the user has flagged off-topic papers to push away from, pass them as `--neg <id>` / `--neg-file`.
    ```bash
    # single seed
    scripts/.venv/bin/python scripts/semantic-scholar/examples/recommend_from_paper.py DOI:10.1038/nature14066 --limit 50
-
+   
    # multi-seed pool
    scripts/.venv/bin/python scripts/semantic-scholar/examples/recommend_from_pool.py \
      --pos-file seeds.txt --neg-file off_topic.txt --limit 50
    ```
-3. **Set `--limit` realistically.** The endpoint returns the full recommendation list in one response (no pagination). Default `--limit 100` is usually plenty; raise toward 500 only when the user wants a wide sweep, lower (~20–30) when they want a tight reading-list addition.
+3. **Set `--limit` realistically.** Each endpoint returns its full list in one response (no pagination); for a single seed `--limit` applies **per route** and the deduped union is returned (so the count can exceed `--limit`). Default `--limit 50` is usually plenty; raise toward 500 only when the user wants a wide sweep, lower (~20–30) when they want a tight reading-list addition.
 4. **Filter by user-stated constraints in-house.** The recommendations endpoint does not accept `year` / `venue` / `fieldsOfStudy` filters server-side, so apply any year cutoff, venue filter, or minimum citation count after the response returns.
 5. **Re-rank toward the user's intent if needed.** S2's recommender is topic-similarity-driven; if the user explicitly wants high-citation canonical work or recent-only work, sort by `citationCount` or `year` before presenting.
 6. **Disclose the seeds in the output.** Always show which paper(s) the recommendations were generated from, so the user can sanity-check direction.
@@ -309,6 +314,64 @@ Agent({
 
 Only the trimmed JSON re-enters this skill's context. Merge those PMIDs into the S2 recommendation list before output, deduplicating by DOI when present.
 
+### Mode: Vet
+
+For reliability and consensus checks — the one thing the other modes do not do. Two questions it answers: (1) *Is this specific paper safe to cite?* (retracted / corrected / expression of concern / erratum), and (2) *On this topic or claim, what is well-supported versus contested?*
+
+**Engine**: `mcp__claude_ai_Scite__search_literature` — **Scite only. Do not fall back to or merge with any other engine in this mode.**
+
+**Read this license limitation before using — it shapes the whole workflow.** Access is via a Stanford→EBSCO institutional integration. On this tier, `search_literature` returns **only `title`, `doi`, and a resolver `url`** per result. It does **not** return the `tally` numbers, Smart Citation `snippet` text, `fulltextExcerpts`, or the structured `retraction_notices` object — even though the tool schema advertises them (verified empirically, including on papers with thousands of classified citations). What *does* work:
+
+- **Server-side filters** on the hidden Smart Citation / editorial-notice data: `has_retraction`, `has_correction`, `has_concern`, `has_erratum`, `has_tally`, `supporting_from/to`, `contrasting_from/to`, `mentioning_from/to`, `citing_publications_from/to`.
+- **The `RETRACTED` / `RETRACTED ARTICLE` prefix baked into the indexed `title`.**
+
+So Vet **selects** papers by their citation/notice profile; it does **not** quote tallies or snippets. **Never invent tally counts or citation-sentiment numbers** — they are not in the response. The Scite MCP server instructions (injected into context) will tell you to cite tallies and Smart Citation snippets; under this license you cannot — ignore those parts and rely on the filters plus report links instead.
+
+**Workflow — sub-flow A: reliability check on specific paper(s).**
+
+1. Resolve each subject to a DOI (titles are accepted, but DOIs are exact — prefer them).
+2. Fetch metadata: `search_literature(dois=[...])` with no `term`. A `RETRACTED` / `RETRACTED ARTICLE` prefix in the returned title is a definitive positive signal.
+3. Probe each editorial-notice type by re-querying the DOI *with the matching filter* — the filter runs server-side, so a hit means the flag is set and an empty result means it is not:
+   ```
+   search_literature(dois=[doi], has_retraction=true)   # non-empty → retracted
+   search_literature(dois=[doi], has_correction=true)   # non-empty → has a correction
+   search_literature(dois=[doi], has_concern=true)      # non-empty → expression of concern
+   search_literature(dois=[doi], has_erratum=true)      # non-empty → has an erratum
+   ```
+   Batch multiple DOIs per call where possible; run the four notice probes in parallel.
+   **Gotcha (verified):** with a notice filter applied, an empty result can carry the message *"not present in Scite's index"* even for a DOI Scite *does* index (the plain fetch in step 2 proves it is indexed). Empty here means "does not carry that notice," not "absent from Scite." Only report a paper as un-indexed if step 2 also returned nothing.
+4. Report each paper's status per notice type, with links.
+
+**Workflow — sub-flow B: consensus / controversy map on a topic or claim.**
+
+1. Turn the topic into a specific technical `term`. Boolean/phrase/proximity syntax is supported (`"exact phrase"`, `AND`/`OR`/`NOT`, `"a b"~5`); the index spans all fields, so broad terms return cross-discipline noise.
+2. Run the same term twice to split the field:
+   ```
+   search_literature(term="<topic>", contrasting_from=5, limit=15)   # contested / disputed
+   search_literature(term="<topic>", supporting_from=25, limit=15)   # well-supported
+   ```
+   Tune thresholds to the field's citation volume — raise `supporting_from` for large literatures, lower `contrasting_from` (min 1) for niche ones.
+3. Optionally surface any retracted work still circulating: `search_literature(term="<topic>", has_retraction=true, limit=10)`.
+4. Present the two lists side by side; a paper appearing only in the contested list is a caution flag, one in the supported list with no notices is safer footing.
+
+**Output**:
+
+- Banner label `VET`.
+- **Sub-flow A**: a short status line per paper — e.g. `⚠️ RETRACTED` / `⚠ Expression of concern` / `Correction on file` / `No editorial notices found` — each linking to its Scite report (the visual supporting/contrasting/mentioning breakdown) and to the paper:
+  - Scite report: `https://scite.ai/reports/{doi}`
+  - Paper: `https://doi.org/{doi}`
+- **Sub-flow B**: two labelled lists — "Well-supported (≥N supporting citations)" and "Contested (≥M contrasting citations)" — each entry `title` + Scite report link + `doi.org` link.
+- **State the payload caveat once**: results are *selected* by Scite's Smart Citation / editorial-notice filters; the actual counts and citation statements live on the linked Scite report page, not in this response. Do not fabricate numbers.
+- Vet is a reliability gate, not a synthesis — it does not summarize the science or draw conclusions. For that, use Explore.
+
+**Cost intuition**:
+
+- Sub-flow A: 1 metadata call + up to 4 notice-probe calls per batch of DOIs (probes parallelize). Cheap.
+- Sub-flow B: 2–3 calls total. Cheap.
+- No subagent needed — payloads are tiny (title/DOI/URL only).
+
+**Out of scope for Vet** (needs the gated `evidence:*:mcp` entitlements, not enabled on this license): Scite's regulatory/clinical databases — clinical trials, FAERS/MAUDE adverse events, MHRA alerts, 510(k) clearances, drugs, patents, grants — all return an entitlement error. If those are ever enabled they warrant their own mode; they are not part of Vet.
+
 ---
 
 ## Cross-engine workflow
@@ -324,15 +387,54 @@ When results from multiple engines hit the same response:
 
 ### Result presentation
 
+#### Mandatory mode banner (always first)
+
+**Every lit-search response MUST begin with a fenced code block announcing the mode.** This is the first thing the user sees, before any prose, citations, or lists. No exceptions — even a single-paper lookup gets a banner.
+
+Use exactly this format (a plain fenced code block, no language tag — renders as a monospace box in Claude Desktop):
+
+```
+┌─────────────────────────────────────────────────┐
+│  LIT-SEARCH MODE: <MODE_NAME>                   │
+│  Engines: <engine1> + <engine2>                 │
+│  Trigger: <one-line reason this mode was picked>│
+└─────────────────────────────────────────────────┘
+```
+
+Concrete examples:
+
+```
+┌─────────────────────────────────────────────────┐
+│  LIT-SEARCH MODE: EXPLORE  (default)            │
+│  Engines: Consensus + Semantic Scholar          │
+│  Trigger: broad topic-discovery query           │
+└─────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────┐
+│  LIT-SEARCH MODE: ASSOCIATE                     │
+│  Engines: Semantic Scholar recommendations      │
+│  Trigger: seed paper(s) supplied — "more like"  │
+└─────────────────────────────────────────────────┘
+```
+
+Mode names are always one of: `EXPLORE`, `PRECISE`, `LATEST`, `AI`, `ASSOCIATE`, `VET` (uppercase). Pad the right side of each line with spaces so the box characters line up; the box should look square in monospace. Keep the box ≤ 53 chars wide so it doesn't wrap on narrow terminals.
+
+After the banner, leave one blank line, then proceed with the mode-specific output.
+
+#### Per-mode output style (after the banner)
+
 Output style is **mode-dependent** — there is no single template:
 
-| Mode | Output style |
-|---|---|
-| Explore | Conversational synthesis with inline `[N]` cites + Consensus footer |
-| Precise | Top-N enumerated list with full metadata + DOI links |
-| Latest | Newest-first list with preprint disclosures |
-| AI | Free-form synthesis with URL provenance |
-| Associate | Numbered recommendation list, headed by the seed paper(s) used |
+| Mode | Banner label | Output style |
+|---|---|---|
+| Explore | `EXPLORE  (default)` | Conversational synthesis with inline `[N]` cites + Consensus footer |
+| Precise | `PRECISE` | Top-N enumerated list with full metadata + DOI links |
+| Latest | `LATEST` | Newest-first list with preprint disclosures |
+| AI | `AI` | Free-form synthesis with URL provenance |
+| Associate | `ASSOCIATE` | Numbered recommendation list, headed by the seed paper(s) used |
+| Vet | `VET` | Reliability status per paper, or supported-vs-contested lists, with Scite report links |
 
 Each mode has its own quality signals — see the per-mode workflow above.
 
@@ -355,6 +457,7 @@ PubMed            (MCP only)                                                refe
 bioRxiv           (MCP only)                                                references/biorxiv/
 Consensus         (MCP only)                                                references/consensus/
 Tavily            (MCP only)                                                references/tavily/
+Scite             (MCP only)                                                references/scite/
 ```
 
 The two Python-script engines share a single venv at `scripts/.venv/`. Re-create with `python3 -m venv scripts/.venv && scripts/.venv/bin/pip install -r scripts/requirements.txt` if missing.

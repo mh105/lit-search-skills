@@ -20,7 +20,8 @@ Endpoints covered:
     /papers/forpaper/{id}    single-seed recommendations (from=recent|all-cs)
     /papers/                 POST multi-seed (positivePaperIds + negativePaperIds)
 
-Authentication: header `x-api-key`. Set S2_API_KEY in env (or .env in any parent dir).
+Authentication: header `x-api-key`. Set S2_API_KEY in env (or a .env beside this
+script / in any parent dir).
 Rate limit with key: 1 RPS across all endpoints. Without key: shared 5000/5min pool.
 
 See ./references/ for the canonical endpoint catalog (markdown + endpoints.db).
@@ -29,8 +30,10 @@ See ./references/ for the canonical endpoint catalog (markdown + endpoints.db).
 from __future__ import annotations
 
 import os
+import subprocess
 import time
 from typing import Any, Iterator, Optional, Sequence
+from urllib.parse import quote
 
 from requests import Session
 from requests.adapters import HTTPAdapter
@@ -38,9 +41,19 @@ from urllib3.util import Retry
 
 
 def _load_dotenv_if_present() -> None:
+    # Look beside this client first (scripts/semantic-scholar/.env), then the
+    # cwd and up to 5 parent dirs. Own-dir wins so a per-engine .env drop-in
+    # works regardless of where the script is invoked from.
+    search_dirs = [os.path.dirname(os.path.abspath(__file__))]
     cwd = os.getcwd()
     for _ in range(5):
-        candidate = os.path.join(cwd, ".env")
+        search_dirs.append(cwd)
+        nxt = os.path.dirname(cwd)
+        if nxt == cwd:
+            break
+        cwd = nxt
+    for d in search_dirs:
+        candidate = os.path.join(d, ".env")
         if os.path.isfile(candidate):
             try:
                 with open(candidate, "r") as f:
@@ -49,17 +62,34 @@ def _load_dotenv_if_present() -> None:
                         if not line or line.startswith("#") or "=" not in line:
                             continue
                         k, _, v = line.partition("=")
-                        os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+                        k = k.strip()
+                        if k in os.environ:
+                            continue  # real shell / settings.json env wins
+                        v = v.strip().strip('"').strip("'")
+                        # A value of the form $(...) is run in a shell and
+                        # replaced by its stdout, so a .env can pull a live
+                        # value from the user's shell profile at runtime
+                        # instead of freezing a copy of the secret.
+                        if v.startswith("$(") and v.endswith(")"):
+                            try:
+                                v = subprocess.run(
+                                    v[2:-1], shell=True, text=True,
+                                    capture_output=True, timeout=15,
+                                ).stdout.strip()
+                            except Exception:
+                                v = ""
+                        if v:
+                            os.environ[k] = v
             except OSError:
                 pass
             return
-        nxt = os.path.dirname(cwd)
-        if nxt == cwd:
-            break
-        cwd = nxt
 
 
 _load_dotenv_if_present()
+
+
+def _path_id(paper_id: str) -> str:
+    return quote(paper_id, safe="")
 
 
 GRAPH_BASE = "https://api.semanticscholar.org/graph/v1"
@@ -300,7 +330,7 @@ class S2Client:
         return self._get(self.graph_base, "/paper/autocomplete", {"query": query})
 
     def paper_get(self, paper_id: str, *, fields: str = DEFAULT_PAPER_FIELDS) -> dict:
-        return self._get(self.graph_base, f"/paper/{paper_id}", {"fields": fields})
+        return self._get(self.graph_base, f"/paper/{_path_id(paper_id)}", {"fields": fields})
 
     def paper_batch(
         self,
@@ -332,7 +362,7 @@ class S2Client:
     ) -> dict:
         return self._get(
             self.graph_base,
-            f"/paper/{paper_id}/citations",
+            f"/paper/{_path_id(paper_id)}/citations",
             {"fields": fields, "limit": limit, "offset": offset},
         )
 
@@ -346,7 +376,7 @@ class S2Client:
     ) -> dict:
         return self._get(
             self.graph_base,
-            f"/paper/{paper_id}/references",
+            f"/paper/{_path_id(paper_id)}/references",
             {"fields": fields, "limit": limit, "offset": offset},
         )
 
@@ -358,7 +388,7 @@ class S2Client:
         max_results: Optional[int] = None,
     ) -> Iterator[dict]:
         yield from self._paginate_offset(
-            f"/paper/{paper_id}/citations", {"fields": fields}, max_results
+            f"/paper/{_path_id(paper_id)}/citations", {"fields": fields}, max_results
         )
 
     def paper_references_all(
@@ -369,7 +399,7 @@ class S2Client:
         max_results: Optional[int] = None,
     ) -> Iterator[dict]:
         yield from self._paginate_offset(
-            f"/paper/{paper_id}/references", {"fields": fields}, max_results
+            f"/paper/{_path_id(paper_id)}/references", {"fields": fields}, max_results
         )
 
     def snippet_search(
@@ -449,7 +479,7 @@ class S2Client:
     ) -> dict:
         return self._get(
             self.recs_base,
-            f"/papers/forpaper/{paper_id}",
+            f"/papers/forpaper/{_path_id(paper_id)}",
             {"fields": fields, "limit": limit, "from": from_pool},
         )
 
