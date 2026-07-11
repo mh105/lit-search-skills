@@ -1,2 +1,0 @@
-# osf_client uses only the Python standard library (urllib + json).
-# This file is here for parity with sibling pathways; no third-party deps.
