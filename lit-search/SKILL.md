@@ -136,9 +136,9 @@ For broad topic-driven discovery in contextual discussions where the user wants 
 
 **Output**:
 
-- Apply the Consensus citation protocol (`references/consensus/output_protocol.md`): inline `[N]` cites, exact consensus.app URLs verbatim with `?utm_source=claude_desktop` intact, mandatory "Upgrade to Pro" footer at end.
+- For Consensus hits: inline `[N]` cites, with each consensus.app URL preserved verbatim (including its `utm_source` query param).
 - For S2-only finds, use a separate `[S2-N]` block linked via DOI.
-- See `references/consensus/output_protocol.md` for the cross-engine merge pattern.
+- Keep Consensus results in their own block — see Deduplication below — since their opaque-hash URLs can't merge into a DOI-keyed bibliography.
 
 ### Mode: Precise
 
@@ -375,7 +375,7 @@ When results from multiple engines hit the same response:
 1. **DOI when populated** is the primary key. Most engines return DOIs (S2 `externalIds.DOI`, PubMed `article.identifiers.doi`, bioRxiv top-level `doi`, PsyArxiv `attributes.doi` or `links.preprint_doi`).
 2. **Title (case-insensitive, whitespace-normalized)** when DOI is missing.
 3. **Within PsyArxiv only**, also dedup on the versioned id (`fu6de_v1` vs `fu6de_v2` are intentionally distinct — keep the latest).
-4. **Consensus stays separate** — its URLs use opaque hashes, not DOIs, and its citation protocol forbids merging into a DOI-keyed bibliography. See `references/consensus/output_protocol.md`.
+4. **Consensus stays separate** — its URLs use opaque hashes, not DOIs, so it can't merge into a DOI-keyed bibliography. Keep Consensus hits in their own block.
 
 ### Result presentation
 
@@ -421,7 +421,7 @@ Output style is **mode-dependent** — there is no single template:
 
 | Mode | Banner label | Output style |
 |---|---|---|
-| Explore | `EXPLORE  (default)` | Conversational synthesis with inline `[N]` cites + Consensus footer |
+| Explore | `EXPLORE  (default)` | Conversational synthesis with inline `[N]` cites |
 | Precise | `PRECISE` | Top-N enumerated list with full metadata + DOI links |
 | Latest | `LATEST` | Newest-first list with preprint disclosures |
 | AI | `AI` | Free-form synthesis with URL provenance |
@@ -458,7 +458,7 @@ Per-engine reference docs follow a uniform structure:
 
 - `tool_reference.md` — what tools / parameters / response shapes are available.
 - `usage_guide.md` — when to use, gotchas, recipes, defaults.
-- `output_protocol.md` — formatting requirements (only for Consensus and PubMed, which have mandatory rules).
+- `output_protocol.md` — formatting requirements (only for PubMed, which has mandatory rules).
 
 When uncertain about a parameter on any engine, open the `tool_reference.md` for that engine first. When uncertain about *whether* to use an engine for a given query, check the `usage_guide.md`.
 

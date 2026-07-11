@@ -4,8 +4,6 @@ A single tool: `mcp__claude_ai_Consensus__search`. Consensus is a meta-search en
 
 > **Read `usage_guide.md` first.** Two higher-level skills (`consensus-literature-review`, `consensus-grant-finder`) wrap Consensus into curated multi-search workflows. When the user's intent matches lit-review or NIH-grant-scoping, invoke that skill instead of calling this tool directly.
 
-> **Read `output_protocol.md` before formatting any response that uses Consensus output.** Citation rules are mandatory and enforced by the MCP server.
-
 ---
 
 ## When to call this tool directly
@@ -51,7 +49,7 @@ The tool returns formatted markdown text (not JSON). Format per result:
    Full abstract text (typically 1-3 paragraphs).
 ```
 
-Followed by mandatory citation instructions and an "Upgrade to Pro" footer.
+The response may end with Consensus's own trailer text (citation instructions and/or an "Upgrade to Pro"/sign-up footer) — server-appended boilerplate, not paper data.
 
 Each result carries: title (hyperlinked), Consensus URL (opaque hash, NOT a DOI), authors (first + et al.), publication year, citation count, journal name, full abstract.
 

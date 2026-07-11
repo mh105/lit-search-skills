@@ -64,7 +64,7 @@ References:
 
 Annotating the engine-of-origin (`— PubMed`, `— Semantic Scholar`) is good practice but not required by the protocol.
 
-For Consensus, do **not** merge — Consensus output uses opaque consensus.app URLs and must stay in a separate block. See `../consensus/output_protocol.md`.
+For Consensus, do **not** merge — Consensus output uses opaque consensus.app URLs and must stay in a separate block.
 
 ---
 

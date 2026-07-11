@@ -5,7 +5,7 @@ This page covers two distinct concerns:
 1. **Skill-level routing**: when to delegate to the higher-level skills (`consensus-literature-review`, `consensus-grant-finder`) vs calling the MCP directly.
 2. **Direct-call patterns**: filter philosophy, cross-engine bridging, and edge cases for the times you do call the MCP directly.
 
-For mandatory output formatting (inline cites, exact URLs, "Upgrade to Pro" footer), see `output_protocol.md`. For the parameter surface, see `tool_reference.md`.
+For the parameter surface, see `tool_reference.md`.
 
 ---
 
@@ -36,8 +36,7 @@ Apply in order. Stop at first match.
 3. Otherwise (quick paper list, evidence question, cross-check, simple lookup,
    contextual discussion, exploratory mode):
      → call `mcp__claude_ai_Consensus__search` directly
-     → Apply the filter philosophy below and the citation rules in
-       `output_protocol.md`.
+     → Apply the filter philosophy below.
 ```
 
 ### Trigger phrases — `consensus-literature-review`
@@ -107,7 +106,7 @@ Consensus output has opaque hash URLs and no DOI/PMID/paperId. To follow a Conse
 
 Title-match is reliable at ≥7 distinct words. Below that, ambiguity climbs and you may need disambiguation by author + year.
 
-For cross-engine deduplication, **keep Consensus papers in their own block** in the response — see `output_protocol.md` — because their URLs can't be merged into a DOI-keyed list without breaking the citation requirements.
+For cross-engine deduplication, **keep Consensus papers in their own block** in the response, because their opaque-hash URLs can't be merged into a DOI-keyed list.
 
 ---
 
